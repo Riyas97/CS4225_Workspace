@@ -129,9 +129,9 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                st.table(corr_df1)
-                st.table(corr_df2)
-                st.table(corr_df3)
+                #st.table(corr_df1)
+                #st.table(corr_df2)
+                #st.table(corr_df3)
                 data1 = {'Correlation values': [corr_df1.iat[1,3], corr_df2.iat[1,3], corr_df3.iat[1,3]]}
                 data2 = {'Correlation values': [corr_df1.iat[1,4], corr_df2.iat[1,4], corr_df3.iat[1,4]]}
                 data3 = {'Correlation values': [corr_df1.iat[1,5], corr_df2.iat[1,5], corr_df3.iat[1,5]]}
@@ -142,11 +142,11 @@ def run():
                 cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
                        columns=['Pearson', 'Kendall', 'Spearman'])
                 
-                st.markdown("Correlation between positive sentiments and Reproduction Rate")
+                st.markdown("Correlation between Positive Sentiments and Reproduction Rate")
                 st.table(cus_df1)
-                st.markdown("Correlation between negative sentiments and Reproduction Rate")
+                st.markdown("Correlation between Negative Sentiments and Reproduction Rate")
                 st.table(cus_df2)
-                st.markdown("Correlation between neutral sentiments and Reproduction Rate")
+                st.markdown("Correlation between Neutral Sentiments and Reproduction Rate")
                 st.table(cus_df3)
 
         else:
