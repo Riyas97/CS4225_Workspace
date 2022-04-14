@@ -96,7 +96,22 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                st.table(corr_df1)
+                data1 = {'Correlation values': [corr_df1.iat[0,3], corr_df2.iat[0,3], corr_df3.iat[0,3]]}
+                data2 = {'Correlation values': [corr_df1.iat[0,4], corr_df2.iat[0,4], corr_df3.iat[0,4]]}
+                data3 = {'Correlation values': [corr_df1.iat[0,5], corr_df2.iat[0,5], corr_df3.iat[0,5]]}
+                cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
+                       columns=['Pearson', 'Kendall', 'Spearman'])
+                cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
+                       columns=['Pearson', 'Kendall', 'Spearman'])
+                cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
+                       columns=['Pearson', 'Kendall', 'Spearman'])
+                
+                st.markdown("Correlation between Positive Sentiments and Stringency Index")
+                st.table(cus_df1)
+                st.markdown("Correlation between Negative Sentiments and Stringency Index")
+                st.table(cus_df2)
+                st.markdown("Correlation between Neutral Sentiments and Stringency Index")
+                st.table(cus_df3)
 
             fig2 = make_subplots(rows=1, cols=1)
             fig2.add_scatter(
