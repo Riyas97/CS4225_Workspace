@@ -127,7 +127,11 @@ def run():
             correlation_values = st.expander('Correlation values')
             with correlation_values:
                 st.table(corr_df)
-                st.info(df.iat[0,1])
+                Dict1 = {"Pearson": corr_df.iat[1,3], "kendall": corr_df.iat[1,3], "Spearman": corr_df.iat[1,3]}
+                st.table(Dict1)
+                st.markdown("Correlation between positive sentiments and Reproduction Rate")
+                st.info(corr_df.iat[0,1])
+                st.markdown("Correlation between negative sentiments and Reproduction Rate")
 
         else:
             see_intro = st.expander('Project Details')
