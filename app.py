@@ -67,7 +67,7 @@ def run():
             fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_mixed_sentiments"]], mode='lines', name="%_of_mixed_sentiments")
             
             fig1.update_layout(
-                title="Chart 1: Stringency Index vs Time & Percentage of Sentiments vs Time",
+                title="<b>Chart 1: Stringency Index vs Time & Percentage of Sentiments vs Time</b>",
                 xaxis_title="Date",
                 yaxis_title="Values",
             )
@@ -90,7 +90,7 @@ def run():
             fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_mixed_sentiments"], mode='lines', name="proportion_of_mixed_sentiments")
             
             fig2.update_layout(
-                title="Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time",
+                title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
                 xaxis_title="Date",
                 yaxis_title="Values",
             )
