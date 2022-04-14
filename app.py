@@ -78,7 +78,10 @@ def run():
             fig1.update_layout(
                 xaxis_title="Date",
                 yaxis_title="Values",
-                title="<b>Chart 1: Stringency Index vs Time & Percentage of Sentiments vs Time</b>"
+                title="<b>Chart 1: Stringency Index vs Time & Percentage of Sentiments vs Time</b>",
+                font=dict(
+                    size=13
+                )
             )
 
             st.plotly_chart(fig1)
@@ -128,7 +131,7 @@ def run():
                 xaxis_title="Date",
                 yaxis_title="Values",
                 font=dict(
-                    size=14
+                    size=13
                 )
             )
 
