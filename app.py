@@ -87,8 +87,8 @@ def run():
             st.plotly_chart(fig1)
 
             st.info(
-                "🛈 Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
-            
+                "🛈 Click on the respective variable legend (on the right of the chart) to select or deselect it.")
+
             metrics_meaning = st.expander('What does the metrics mean?')
             with metrics_meaning:
                 st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
@@ -99,21 +99,27 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                data1 = {'Correlation values': [corr_df1.iat[0,3], corr_df2.iat[0,3], corr_df3.iat[0,3]]}
-                data2 = {'Correlation values': [corr_df1.iat[0,4], corr_df2.iat[0,4], corr_df3.iat[0,4]]}
-                data3 = {'Correlation values': [corr_df1.iat[0,5], corr_df2.iat[0,5], corr_df3.iat[0,5]]}
+                data1 = {'Correlation values': [
+                    corr_df1.iat[0, 3], corr_df2.iat[0, 3], corr_df3.iat[0, 3]]}
+                data2 = {'Correlation values': [
+                    corr_df1.iat[0, 4], corr_df2.iat[0, 4], corr_df3.iat[0, 4]]}
+                data3 = {'Correlation values': [
+                    corr_df1.iat[0, 5], corr_df2.iat[0, 5], corr_df3.iat[0, 5]]}
                 cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
-                       columns=['Pearson', 'Kendall', 'Spearman'])
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
                 cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
-                       columns=['Pearson', 'Kendall', 'Spearman'])
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
                 cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
-                       columns=['Pearson', 'Kendall', 'Spearman'])
-                
-                st.markdown("Correlation between Positive Sentiments and Stringency Index")
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
+
+                st.markdown(
+                    "Correlation between Positive Sentiments and Stringency Index")
                 st.table(cus_df1)
-                st.markdown("Correlation between Negative Sentiments and Stringency Index")
+                st.markdown(
+                    "Correlation between Negative Sentiments and Stringency Index")
                 st.table(cus_df2)
-                st.markdown("Correlation between Neutral Sentiments and Stringency Index")
+                st.markdown(
+                    "Correlation between Neutral Sentiments and Stringency Index")
                 st.table(cus_df3)
 
             fig2 = make_subplots(rows=1, cols=1)
@@ -132,15 +138,14 @@ def run():
                 yaxis_title="Values",
                 font=dict(
                     size=13
-                ),
-                legend_title="Click on the respective legend to select or deselect it",
+                )
             )
 
             st.plotly_chart(fig2)
 
             st.info(
-                "🛈 Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
-            
+                "🛈 Click on the respective variable legend (on the right of the chart) to select or deselect it.")
+
             metrics_meaning = st.expander('What does the metrics mean?')
             with metrics_meaning:
                 st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
@@ -151,24 +156,30 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                #st.table(corr_df1)
-                #st.table(corr_df2)
-                #st.table(corr_df3)
-                data1 = {'Correlation values': [corr_df1.iat[1,3], corr_df2.iat[1,3], corr_df3.iat[1,3]]}
-                data2 = {'Correlation values': [corr_df1.iat[1,4], corr_df2.iat[1,4], corr_df3.iat[1,4]]}
-                data3 = {'Correlation values': [corr_df1.iat[1,5], corr_df2.iat[1,5], corr_df3.iat[1,5]]}
+                # st.table(corr_df1)
+                # st.table(corr_df2)
+                # st.table(corr_df3)
+                data1 = {'Correlation values': [
+                    corr_df1.iat[1, 3], corr_df2.iat[1, 3], corr_df3.iat[1, 3]]}
+                data2 = {'Correlation values': [
+                    corr_df1.iat[1, 4], corr_df2.iat[1, 4], corr_df3.iat[1, 4]]}
+                data3 = {'Correlation values': [
+                    corr_df1.iat[1, 5], corr_df2.iat[1, 5], corr_df3.iat[1, 5]]}
                 cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
-                       columns=['Pearson', 'Kendall', 'Spearman'])
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
                 cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
-                       columns=['Pearson', 'Kendall', 'Spearman'])
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
                 cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
-                       columns=['Pearson', 'Kendall', 'Spearman'])
-                
-                st.markdown("Correlation between Positive Sentiments and Reproduction Rate")
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
+
+                st.markdown(
+                    "Correlation between Positive Sentiments and Reproduction Rate")
                 st.table(cus_df1)
-                st.markdown("Correlation between Negative Sentiments and Reproduction Rate")
+                st.markdown(
+                    "Correlation between Negative Sentiments and Reproduction Rate")
                 st.table(cus_df2)
-                st.markdown("Correlation between Neutral Sentiments and Reproduction Rate")
+                st.markdown(
+                    "Correlation between Neutral Sentiments and Reproduction Rate")
                 st.table(cus_df3)
 
         else:
