@@ -127,8 +127,7 @@ def run():
             correlation_values = st.expander('Correlation values')
             with correlation_values:
                 st.table(corr_df)
-                st.info(corr_df[0][0])
-                st.info(corr_df.at[0,'A'])
+                st.info(df.iat[0,1])
 
         else:
             see_intro = st.expander('Project Details')
