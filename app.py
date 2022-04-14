@@ -82,8 +82,7 @@ def run():
 
             st.info(
                 "🛈 Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
-            st.info("🛈 Expand the tab below to look at the correlation values between the variables and/or better understand what each metrics/variables mean")
-
+            
             metrics_meaning = st.expander('What does the metrics mean?')
             with metrics_meaning:
                 st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
@@ -113,6 +112,23 @@ def run():
             )
 
             st.plotly_chart(fig2)
+
+            st.info(
+                "🛈 Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
+            
+            metrics_meaning = st.expander('What does the metrics mean?')
+            with metrics_meaning:
+                st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
+                st.markdown(
+                    "reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
+                st.markdown(
+                    "new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
+
+            correlation_values = st.expander('Correlation values')
+            with correlation_values:
+                st.table(corr_df)
+                st.info(corr_df[0][0])
+                st.info(corr_df.at[0,'A'])
 
         else:
             see_intro = st.expander('Project Details')
