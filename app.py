@@ -127,6 +127,9 @@ def run():
                 title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
                 xaxis_title="Date",
                 yaxis_title="Values",
+                font=dict(
+                    size=14
+                )
             )
 
             st.plotly_chart(fig2)
