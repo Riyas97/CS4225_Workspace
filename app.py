@@ -60,42 +60,46 @@ def run():
             
             #fig = px.line(df_filtered, x="date", y=df.columns[2:8])
 
-            fig1 = make_subplots(rows=1, cols=1)
-            fig1.add_scatter(x=df_filtered["date"], y=df_filtered["stringency_index"], mode='lines', name="stringency_index")
-            fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_positive_sentiments"]], mode='lines', name="%_of_positive_sentiments")
-            fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_negative_sentiments"]], mode='lines', name="%_of_negative_sentiments")
-            fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_mixed_sentiments"]], mode='lines', name="%_of_mixed_sentiments")
-            
-            fig1.update_layout(
-                title="<b>Chart 1: Stringency Index vs Time & Percentage of Sentiments vs Time</b>",
-                xaxis_title="Date",
-                yaxis_title="Values",
-            )
+            fig1_expander = st.expander('**Chart 1: Stringency Index vs Time & Percentage of Sentiments vs Time**')
+            with fig1_expander:
 
-            st.plotly_chart(fig1)
+                fig1 = make_subplots(rows=1, cols=1)
+                fig1.add_scatter(x=df_filtered["date"], y=df_filtered["stringency_index"], mode='lines', name="stringency_index")
+                fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_positive_sentiments"]], mode='lines', name="%_of_positive_sentiments")
+                fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_negative_sentiments"]], mode='lines', name="%_of_negative_sentiments")
+                fig1.add_scatter(x=df_filtered["date"], y=[val * 100 for val in df_filtered["%_of_mixed_sentiments"]], mode='lines', name="%_of_mixed_sentiments")
+                
+                fig1.update_layout(
+                    xaxis_title="Date",
+                    yaxis_title="Values",
+                )
 
-            st.markdown("🛈 Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
-            st.markdown("🛈 Expand the tab below to look at the correlation values between the variables and/or better understand what each metrics/variables mean")
-            
-            metrics_meaning = st.expander('What does the metrics mean?')
-            with metrics_meaning:
-                st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
-                st.markdown("reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
-                st.markdown("new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
-            
-            fig2 = make_subplots(rows=1, cols=1)
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["reproduction_rate"], mode='lines', name="reproduction_rate")
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_positive_sentiments"], mode='lines', name="proportion_of_positive_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_negative_sentiments"], mode='lines', name="proportion_of_negative_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_mixed_sentiments"], mode='lines', name="proportion_of_mixed_sentiments")
-            
-            fig2.update_layout(
-                title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
-                xaxis_title="Date",
-                yaxis_title="Values",
-            )
+                st.plotly_chart(fig1)
 
-            st.plotly_chart(fig2)
+                st.markdown("🛈 Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
+                st.markdown("🛈 Expand the tab below to look at the correlation values between the variables and/or better understand what each metrics/variables mean")
+                
+                metrics_meaning = st.expander('What does the metrics mean?')
+                with metrics_meaning:
+                    st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
+                    st.markdown("reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
+                    st.markdown("new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
+            
+            fig2_expander = st.expander('**Chart 2: Stringency Index vs Time & Percentage of Sentiments vs Time**')
+            with fig2_expander:
+                fig2 = make_subplots(rows=1, cols=1)
+                fig2.add_scatter(x=df_filtered["date"], y=df_filtered["reproduction_rate"], mode='lines', name="reproduction_rate")
+                fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_positive_sentiments"], mode='lines', name="proportion_of_positive_sentiments")
+                fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_negative_sentiments"], mode='lines', name="proportion_of_negative_sentiments")
+                fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_mixed_sentiments"], mode='lines', name="proportion_of_mixed_sentiments")
+                
+                fig2.update_layout(
+                    title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
+                    xaxis_title="Date",
+                    yaxis_title="Values",
+                )
+
+                st.plotly_chart(fig2)
 
         else:
             see_intro = st.expander('Project Details')
@@ -169,8 +173,5 @@ def run():
                 st.dataframe(data=df.reset_index(drop=True))
 
         
-
-
-
 if __name__ == '__main__':
     run()
