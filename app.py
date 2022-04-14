@@ -58,7 +58,9 @@ def run():
             df_filtered = df.loc[df['location'] == country_selected]
             df_filtered = df_filtered.loc[(df_filtered['date'] >= start_date) & (
                 df_filtered['date'] <= end_date)]
-            corr_df = df_filtered.corr(method='pearson')
+            corr_df1 = df_filtered.corr(method='pearson')
+            corr_df2 = df_filtered.corr(method='kendall')
+            corr_df3 = df_filtered.corr(method='spearman')
 
             #fig = px.line(df_filtered, x="date", y=df.columns[2:8])
 
@@ -93,7 +95,7 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                st.table(corr_df)
+                st.table(corr_df1)
 
             fig2 = make_subplots(rows=1, cols=1)
             fig2.add_scatter(
@@ -126,13 +128,25 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                st.table(corr_df)
-                data1 = {"Pearson": [corr_df.iat[1,3]], "kendall": [corr_df.iat[1,3]], "Spearman": [corr_df.iat[1,3]]}
-                cus_df1 = pd.DataFrame.from_dict(data1)
-                st.table(cus_df1)
+                st.table(corr_df1)
+                st.table(corr_df2)
+                st.table(corr_df3)
+                data1 = {'Correlation values': [corr_df1.iat[1,3], corr_df2.iat[1,3], corr_df3.iat[1,3]]}
+                data2 = {'Correlation values': [corr_df1.iat[1,4], corr_df2.iat[1,4], corr_df3.iat[1,4]]}
+                data3 = {'Correlation values': [corr_df1.iat[1,5], corr_df2.iat[1,5], corr_df3.iat[1,5]]}
+                cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
+                       columns=['Pearson', 'Kendall', 'Spearman'])
+                cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
+                       columns=['Pearson', 'Kendall', 'Spearman'])
+                cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
+                       columns=['Pearson', 'Kendall', 'Spearman'])
+                
                 st.markdown("Correlation between positive sentiments and Reproduction Rate")
-                st.info(corr_df.iat[0,1])
+                st.table(cus_df1)
                 st.markdown("Correlation between negative sentiments and Reproduction Rate")
+                st.table(cus_df2)
+                st.markdown("Correlation between neutral sentiments and Reproduction Rate")
+                st.table(cus_df3)
 
         else:
             see_intro = st.expander('Project Details')
