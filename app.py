@@ -132,7 +132,8 @@ def run():
                 yaxis_title="Values",
                 font=dict(
                     size=13
-                )
+                ),
+                legend_title="Click on the respective legend to select or deselect it",
             )
 
             st.plotly_chart(fig2)
