@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 from plotly.subplots import make_subplots
+from scipy.stats.stats import kendalltau
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
