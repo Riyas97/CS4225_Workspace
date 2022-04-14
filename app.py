@@ -127,8 +127,9 @@ def run():
             correlation_values = st.expander('Correlation values')
             with correlation_values:
                 st.table(corr_df)
-                Dict1 = {"Pearson": corr_df.iat[1,3], "kendall": corr_df.iat[1,3], "Spearman": corr_df.iat[1,3]}
-                st.table(Dict1)
+                data1 = {"Pearson": corr_df.iat[1,3], "kendall": corr_df.iat[1,3], "Spearman": corr_df.iat[1,3]}
+                cus_df1 = pd.DataFrame.from_dict(data1)
+                st.table(cus_df1)
                 st.markdown("Correlation between positive sentiments and Reproduction Rate")
                 st.info(corr_df.iat[0,1])
                 st.markdown("Correlation between negative sentiments and Reproduction Rate")
