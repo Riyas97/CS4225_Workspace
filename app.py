@@ -265,8 +265,8 @@ def run():
             max_value=dt.date(2022, 2, 28))
         end_date = st.sidebar.date_input(
             "Select a end date:",
-            min_value=dt.date(2022, 1, 1),
-            value=dt.date(2022, 1, 1),
+            min_value=dt.date(2022, 1, 2),
+            value=dt.date(2022, 1, 2),
             max_value=dt.date(2022, 2, 28))
 
         if start_date < end_date:
@@ -303,8 +303,9 @@ def run():
 
             st.plotly_chart(fig)
 
-            st.markdown(
-                "Click on the respective variable legend (on the right of the chart) to select and deselect the variable")
+            st.info(
+                "🛈 Click on the respective variable legend (on the right of the chart) to select or deselect it.")
+
             st.markdown(
                 "Expand the tab below to better understand what each metrics/variables mean")
 
