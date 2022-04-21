@@ -115,11 +115,11 @@ def run():
                 data1 = {'Correlation values': [
                     corr_df1.iat[0, 8], corr_df2.iat[0, 8], corr_df3.iat[0, 8]]}
                 data2 = {'Correlation values': [
-                    corr_df1.iat[0, 7], corr_df2.iat[0, 7], corr_df3.iat[0, 7]]}
-                data3 = {'Correlation values': [
-                    corr_df1.iat[0, 8], corr_df2.iat[0, 8], corr_df3.iat[0, 8]]}
-                data4 = {'Correlation values': [
                     corr_df1.iat[0, 6], corr_df2.iat[0, 6], corr_df3.iat[0, 6]]}
+                data3 = {'Correlation values': [
+                    corr_df1.iat[0, 7], corr_df2.iat[0, 7], corr_df3.iat[0, 7]]}
+                data4 = {'Correlation values': [
+                    corr_df1.iat[0, 5], corr_df2.iat[0, 5], corr_df3.iat[0, 5]]}
 
                 cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
                                                  columns=['Pearson', 'Kendall', 'Spearman'])
@@ -198,11 +198,11 @@ def run():
                     data1 = {'Correlation values': [
                         corr_df1.iat[1, 8], corr_df2.iat[1, 8], corr_df3.iat[1, 8]]}
                     data2 = {'Correlation values': [
-                        corr_df1.iat[1, 7], corr_df2.iat[1, 7], corr_df3.iat[1, 7]]}
-                    data3 = {'Correlation values': [
-                        corr_df1.iat[1, 8], corr_df2.iat[1, 8], corr_df3.iat[1, 8]]}
-                    data4 = {'Correlation values': [
                         corr_df1.iat[1, 6], corr_df2.iat[1, 6], corr_df3.iat[1, 6]]}
+                    data3 = {'Correlation values': [
+                        corr_df1.iat[1, 7], corr_df2.iat[1, 7], corr_df3.iat[1, 7]]}
+                    data4 = {'Correlation values': [
+                        corr_df1.iat[1, 5], corr_df2.iat[1, 5], corr_df3.iat[1, 5]]}
 
                     cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
                                                      columns=['Pearson', 'Kendall', 'Spearman'])
