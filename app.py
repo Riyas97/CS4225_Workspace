@@ -244,7 +244,7 @@ def run():
             see_dataset_used = st.expander('Dataset Used')
             with see_dataset_used:
                 st.markdown("The primary dataset type that we will be collecting, is recent twitter tweets from January 1st 2022 to Feb 28th 2022. For this, we will be extracting tweets using a hydrator tool from a GitHub repository (https://github.com/echen102/COVID-19-TweetIDs) that contains an archive of tweet IDs that are associated with COVID-19, filtered by specific periods. The dataset size after hydration can range from 20-50 GB for each-day data (about 2TB data across a two-month period), indicating the need for large storage space and efficient processing power. We also had a decision to make whether to include only English tweets, or to include tweets from other languages. We weighed the pros of both options, where with English tweets we would be able to account for accuracy in tone, while having multiple languages provides more representation of sentiments. In the end, we decided to only include English tweets as we valued the accuracy in our sentiment analysis greater than the representativeness of the sentiments.")
-                st.markdown("Next up, we are also interested to find how the restrictions in these countries changed over the period to understand the change in sentiments. For that, we will be using the COVID-19 Stringency Index, a composite measure based on nine response indicators that measures the strictness of the restrictions in a country. We will download the data from the index’s website. From this website, we will also be extracting other covid-related statistics of a country such as the country's covid reproduction rate.")
+                st.markdown("Next up, we are also interested to find how the restrictions in these countries/areas changed over the period to understand the change in sentiments. For that, we will be using the COVID-19 Stringency Index, a composite measure based on nine response indicators that measures the strictness of the restrictions in a country. We will download the data from the index’s website. From this website, we will also be extracting other covid-related statistics of a country such as the country's covid reproduction rate.")
 
             see_raw_data = st.expander(
                 'Raw Data (that was ingested, processed and aggregated by us)')
@@ -253,9 +253,9 @@ def run():
 
     else:
         st.sidebar.subheader(
-            "Now, select the countries that you want to compare...")
+            "Now, select the countries/areas that you want to compare...")
         selected_countries = st.sidebar.multiselect(
-            "Select and deselect the countries that you want to compare. You can clear the current selection by clicking the corresponding x-button on the right", countries, default=countries)
+            "Select and deselect the countries/areas that you want to compare. You can clear the current selection by clicking the corresponding x-button on the right", countries, default=countries)
 
         st.sidebar.subheader("Now, select a time frame...")
         start_date = st.sidebar.date_input(
@@ -269,7 +269,7 @@ def run():
             value=dt.date(2022, 1, 1),
             max_value=dt.date(2022, 2, 28))
 
-        if start_date <= end_date:
+        if start_date < end_date:
             pass
         else:
             st.error('Error: End date must fall after start date.')
@@ -290,14 +290,16 @@ def run():
                                 mode='lines', name="{cname}-stringency_index".format(cname=country))
                 fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["reproduction_rate"],
                                 mode='lines', name="{cname}-reproduction_rate".format(cname=country))
-                fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["new_deaths_per_million"],
-                                mode='lines', name="{cname}-new_deaths_per_million".format(cname=country))
+                # fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["new_deaths_per_million"],
+                #                mode='lines', name="{cname}-new_deaths_per_million".format(cname=country))
                 fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["%_of_positive_sentiments"],
                                 mode='lines', name="{cname}-%_of_positive_sentiments".format(cname=country))
                 fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["%_of_negative_sentiments"],
                                 mode='lines', name="{cname}-%_of_negative_sentiments".format(cname=country))
                 fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["%_of_mixed_sentiments"],
                                 mode='lines', name="{cname}-%_of_mixed_sentiments".format(cname=country))
+                fig.add_scatter(x=df_filtered_i["date"], y=df_filtered_i["%_of_neutral_sentiments"],
+                                mode='lines', name="{cname}-%_of_neutral_sentiments".format(cname=country))
 
             st.plotly_chart(fig)
 
@@ -312,7 +314,16 @@ def run():
                 st.markdown(
                     "reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
                 st.markdown(
-                    "new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
+                    "%_of_positive_sentiments: Percentage of tweets (belonging to a particular date) that registered a positive sentiment")
+                st.markdown(
+                    "%_of_negative_sentiments: Percentage of tweets (belonging to a particular date) that registered a negative sentiment")
+                st.markdown(
+                    "%_of_mixed_sentiments: Percentage of tweets (belonging to a particular date) that registered a mixed sentiment")
+                st.markdown(
+                    "%_of_neutral_sentiments: Percentage of tweets (belonging to a particular date) that registered a neutral sentiment")
+
+                # st.markdown(
+                #    "new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
 
         else:
             see_intro = st.expander('Project Details')
