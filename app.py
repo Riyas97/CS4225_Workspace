@@ -16,14 +16,14 @@ df['date'] = df['date'].dt.date
 
 st.title("Sentiment Analysis of Tweets about COVID-19")
 st.sidebar.title("Lets' get started!")
-st.markdown("This is a streamlit dashboard application that visualizes people's general sentiment towards COVID-19 in several countries/areas. Please expand the tabs below to find out more about the project! ")
+st.markdown("This is a streamlit dashboard application that visualizes people's general sentiment towards COVID-19 in several countries/areas.")
 st.sidebar.markdown(
     "Follow the instructions below to start exploring the visualizations!")
 
 
 def run():
 
-    pages = ["Visualize Single Country", "Visualize Multiple Countries"]
+    pages = ["Visualize Single Country/Area", "Visualize Multiple Countries/Areas"]
     st.sidebar.subheader("First, choose a visualization type...")
     section = st.sidebar.radio('Visualization selected:', pages)
     countries = ['Singapore', 'United States', 'Italy', 'Germany', 'Norway', 'United Kingdom', 'Australia', 'Taiwan',
@@ -31,7 +31,7 @@ def run():
                  'Vietnam', 'India', 'Canada', 'Saudi Arabia', 'Bahrain',
                  'South Africa', 'Egypt', 'Argentina']
 
-    if section == "Visualize Single Country":
+    if section == "Visualize Single Country/Area":
 
         st.sidebar.subheader("Now, select a country to visualize...")
         country_selected = st.sidebar.selectbox(
@@ -101,9 +101,13 @@ def run():
             with metrics_meaning:
                 st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
                 st.markdown(
-                    "reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
+                    "%_of_positive_sentiments: Percentage of tweets (belonging to a particular date) that registered a positive sentiment")
                 st.markdown(
-                    "new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
+                    "%_of_negative_sentiments: Percentage of tweets (belonging to a particular date) that registered a negative sentiment")
+                st.markdown(
+                    "%_of_mixed_sentiments: Percentage of tweets (belonging to a particular date) that registered a mixed sentiment")
+                st.markdown(
+                    "%_of_neutral_sentiments: Percentage of tweets (belonging to a particular date) that registered a neutral sentiment")
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
@@ -130,73 +134,85 @@ def run():
                     "Correlation between Neutral Sentiments and Stringency Index")
                 st.table(cus_df3)
 
-            fig2 = make_subplots(rows=1, cols=1)
-            fig2.add_scatter(
-                x=df_filtered["date"], y=df_filtered["reproduction_rate"], mode='lines', name="reproduction_rate")
-            fig2.add_scatter(x=df_filtered["date"], y=[
-                val / 100 for val in df_filtered["%_of_positive_sentiments"]],
-                mode='lines', name="proportion_of_positive_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=[
-                val / 100 for val in df_filtered["%_of_negative_sentiments"]],
-                mode='lines', name="proportion_of_negative_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=[
-                val / 100 for val in df_filtered["%_of_mixed_sentiments"]],
-                mode='lines', name="proportion_of_mixed_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=[
-                val / 100 for val in df_filtered["%_of_neutral_sentiments"]],
-                mode='lines', name="proportion_of_neutral_sentiments")
+            if (country_selected == "Hong Kong"):
+                st.markdown(
+                    "Sorry, we were unable to find covid reproduction rate in Hong Kong!")
+            else:
+                fig2 = make_subplots(rows=1, cols=1)
+                fig2.add_scatter(
+                    x=df_filtered["date"], y=df_filtered["reproduction_rate"], mode='lines', name="reproduction_rate")
+                fig2.add_scatter(x=df_filtered["date"], y=[
+                    val / 100 for val in df_filtered["%_of_positive_sentiments"]],
+                    mode='lines', name="proportion_of_positive_sentiments")
+                fig2.add_scatter(x=df_filtered["date"], y=[
+                    val / 100 for val in df_filtered["%_of_negative_sentiments"]],
+                    mode='lines', name="proportion_of_negative_sentiments")
+                fig2.add_scatter(x=df_filtered["date"], y=[
+                    val / 100 for val in df_filtered["%_of_mixed_sentiments"]],
+                    mode='lines', name="proportion_of_mixed_sentiments")
+                fig2.add_scatter(x=df_filtered["date"], y=[
+                    val / 100 for val in df_filtered["%_of_neutral_sentiments"]],
+                    mode='lines', name="proportion_of_neutral_sentiments")
 
-            fig2.update_layout(
-                title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
-                xaxis_title="Date",
-                yaxis_title="Values",
-                font=dict(
-                    size=13
+                fig2.update_layout(
+                    title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
+                    xaxis_title="Date",
+                    yaxis_title="Values",
+                    font=dict(
+                        size=13
+                    )
                 )
-            )
 
-            st.plotly_chart(fig2)
+                st.plotly_chart(fig2)
 
-            st.info(
-                "🛈 Click on the respective variable legend (on the right of the chart) to select or deselect it.")
+                st.info(
+                    "🛈 Click on the respective variable legend (on the right of the chart) to select or deselect it.")
 
-            metrics_meaning = st.expander('What does the metrics mean?')
-            with metrics_meaning:
-                st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest). On the above chart, the value has been divided by 100 to make it easier to observe patterns in the chart")
-                st.markdown(
-                    "reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
-                st.markdown(
-                    "new_deaths_per_million: New deaths attributed to COVID-19 per 1,000,000 people. Counts can include probable deaths, where reported")
+                metrics_meaning = st.expander('What does the metrics mean?')
+                with metrics_meaning:
+                    st.markdown(
+                        "reproduction_rate: Real-time estimate of the effective reproduction rate (R) of COVID-19")
+                    st.markdown(
+                        "%_of_positive_sentiments: Percentage of tweets (belonging to a particular date) that registered a positive sentiment")
+                    st.markdown(
+                        "%_of_negative_sentiments: Percentage of tweets (belonging to a particular date) that registered a negative sentiment")
+                    st.markdown(
+                        "%_of_mixed_sentiments: Percentage of tweets (belonging to a particular date) that registered a mixed sentiment")
+                    st.markdown(
+                        "%_of_neutral_sentiments: Percentage of tweets (belonging to a particular date) that registered a neutral sentiment")
 
-            correlation_values = st.expander('Correlation values')
-            with correlation_values:
-                st.table(corr_df1)
-                st.table(corr_df2)
-                st.table(corr_df3)
-                data1 = {'Correlation values': [
-                    corr_df1.iat[1, 3], corr_df2.iat[1, 3], corr_df3.iat[1, 3]]}
-                data2 = {'Correlation values': [
-                    corr_df1.iat[1, 4], corr_df2.iat[1, 4], corr_df3.iat[1, 4]]}
-                data3 = {'Correlation values': [
-                    corr_df1.iat[1, 5], corr_df2.iat[1, 5], corr_df3.iat[1, 5]]}
-                cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
-                                                 columns=['Pearson', 'Kendall', 'Spearman'])
-                cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
-                                                 columns=['Pearson', 'Kendall', 'Spearman'])
-                cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
-                                                 columns=['Pearson', 'Kendall', 'Spearman'])
+                correlation_values = st.expander('Correlation values')
+                with correlation_values:
+                    st.table(corr_df1)
+                    st.table(corr_df2)
+                    st.table(corr_df3)
+                    data1 = {'Correlation values': [
+                        corr_df1.iat[1, 3], corr_df2.iat[1, 3], corr_df3.iat[1, 3]]}
+                    data2 = {'Correlation values': [
+                        corr_df1.iat[1, 4], corr_df2.iat[1, 4], corr_df3.iat[1, 4]]}
+                    data3 = {'Correlation values': [
+                        corr_df1.iat[1, 5], corr_df2.iat[1, 5], corr_df3.iat[1, 5]]}
+                    cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
+                                                     columns=['Pearson', 'Kendall', 'Spearman'])
+                    cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
+                                                     columns=['Pearson', 'Kendall', 'Spearman'])
+                    cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
+                                                     columns=['Pearson', 'Kendall', 'Spearman'])
 
-                st.markdown(
-                    "Correlation between Positive Sentiments and Reproduction Rate")
-                st.table(cus_df1)
-                st.markdown(
-                    "Correlation between Negative Sentiments and Reproduction Rate")
-                st.table(cus_df2)
-                st.markdown(
-                    "Correlation between Neutral Sentiments and Reproduction Rate")
-                st.table(cus_df3)
+                    st.markdown(
+                        "Correlation between Positive Sentiments and Reproduction Rate")
+                    st.table(cus_df1)
+                    st.markdown(
+                        "Correlation between Negative Sentiments and Reproduction Rate")
+                    st.table(cus_df2)
+                    st.markdown(
+                        "Correlation between Neutral Sentiments and Reproduction Rate")
+                    st.table(cus_df3)
 
         else:
+            st.markdown(
+                "Please expand the tabs below to find out more about the project!")
+
             see_intro = st.expander('Project Details')
             with see_intro:
                 st.markdown("Over the recent years, the COVID-19 pandemic has caused serious disruptions all over the world. The pandemic has caused a shear negative impact on the economy and peoples’ livelihoods. Given the increasing vaccine rollup and take-up rate along with the growing evidence about the virus slowly becoming weaker, many governments have become eager to ease the curbs that they once implemented. The motivation is to boost their economies, return to the pre-pandemic normal and as a result improve the lives of their people. However, lifting the restrictions usually causes the cases to rise and more to get severely ill or worse, die. As a result, there are mixed feelings among people whether to ease the restrictions. In the case of Singapore, when the government announced that it will be postponing the streamlined measures in view of the rising cases and the resulting pressure on the healthcare workers, there were again mixed reactions with some applauding the government and the others being disappointed.")
