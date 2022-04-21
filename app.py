@@ -113,7 +113,7 @@ def run():
             correlation_values = st.expander('Correlation values')
             with correlation_values:
 
-                st.info("Note that if any of correlation values are displayed as <NA>, then most probably, it is because one of the variables was constant during the selected time period!")
+                st.info("🛈 Note that if any of correlation values are displayed as <NA>, then most probably, it is because one of the variables was constant during the selected time period!")
 
                 data1 = {'Correlation values': [
                     corr_df1.iat[0, 8], corr_df2.iat[0, 8], corr_df3.iat[0, 8]]}
@@ -199,7 +199,7 @@ def run():
                     # st.table(corr_df2)
                     # st.table(corr_df3)
 
-                    st.info("Note that if any of correlation values are displayed as <NA>, then most probably, it is because one of the variables was constant during the selected time period!")
+                    st.info("🛈 Note that if any of correlation values are displayed as <NA>, then most probably, it is because one of the variables was constant during the selected time period!")
 
                     data1 = {'Correlation values': [
                         corr_df1.iat[1, 8], corr_df2.iat[1, 8], corr_df3.iat[1, 8]]}
