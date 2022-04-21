@@ -23,7 +23,8 @@ st.sidebar.markdown(
 
 def run():
 
-    pages = ["Visualize Single Country/Area", "Visualize Multiple Countries/Areas"]
+    pages = ["Visualize Single Country/Area",
+             "Visualize Multiple Countries/Areas"]
     st.sidebar.subheader("First, choose a visualization type...")
     section = st.sidebar.radio('Visualization selected:', pages)
     countries = ['Singapore', 'United States', 'Italy', 'Germany', 'Norway', 'United Kingdom', 'Australia', 'Taiwan',
@@ -112,16 +113,21 @@ def run():
             correlation_values = st.expander('Correlation values')
             with correlation_values:
                 data1 = {'Correlation values': [
-                    corr_df1.iat[0, 3], corr_df2.iat[0, 3], corr_df3.iat[0, 3]]}
+                    corr_df1.iat[0, 9], corr_df2.iat[0, 9], corr_df3.iat[0, 9]]}
                 data2 = {'Correlation values': [
-                    corr_df1.iat[0, 4], corr_df2.iat[0, 4], corr_df3.iat[0, 4]]}
+                    corr_df1.iat[0, 7], corr_df2.iat[0, 7], corr_df3.iat[0, 7]]}
                 data3 = {'Correlation values': [
-                    corr_df1.iat[0, 5], corr_df2.iat[0, 5], corr_df3.iat[0, 5]]}
+                    corr_df1.iat[0, 8], corr_df2.iat[0, 8], corr_df3.iat[0, 8]]}
+                data4 = {'Correlation values': [
+                    corr_df1.iat[0, 6], corr_df2.iat[0, 6], corr_df3.iat[0, 6]]}
+
                 cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
                                                  columns=['Pearson', 'Kendall', 'Spearman'])
                 cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
                                                  columns=['Pearson', 'Kendall', 'Spearman'])
                 cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
+                                                 columns=['Pearson', 'Kendall', 'Spearman'])
+                cus_df4 = pd.DataFrame.from_dict(data4, orient='index',
                                                  columns=['Pearson', 'Kendall', 'Spearman'])
 
                 st.markdown(
@@ -133,6 +139,9 @@ def run():
                 st.markdown(
                     "Correlation between Neutral Sentiments and Stringency Index")
                 st.table(cus_df3)
+                st.markdown(
+                    "Correlation between Mixed Sentiments and Stringency Index")
+                st.table(cus_df4)
 
             if (country_selected == "Hong Kong"):
                 st.markdown(
@@ -187,16 +196,21 @@ def run():
                     st.table(corr_df2)
                     st.table(corr_df3)
                     data1 = {'Correlation values': [
-                        corr_df1.iat[1, 3], corr_df2.iat[1, 3], corr_df3.iat[1, 3]]}
+                        corr_df1.iat[1, 9], corr_df2.iat[1, 9], corr_df3.iat[1, 9]]}
                     data2 = {'Correlation values': [
-                        corr_df1.iat[1, 4], corr_df2.iat[1, 4], corr_df3.iat[1, 4]]}
+                        corr_df1.iat[1, 7], corr_df2.iat[1, 7], corr_df3.iat[1, 7]]}
                     data3 = {'Correlation values': [
-                        corr_df1.iat[1, 5], corr_df2.iat[1, 5], corr_df3.iat[1, 5]]}
+                        corr_df1.iat[1, 8], corr_df2.iat[1, 8], corr_df3.iat[1, 8]]}
+                    data4 = {'Correlation values': [
+                        corr_df1.iat[1, 6], corr_df2.iat[1, 6], corr_df3.iat[1, 6]]}
+
                     cus_df1 = pd.DataFrame.from_dict(data1, orient='index',
                                                      columns=['Pearson', 'Kendall', 'Spearman'])
                     cus_df2 = pd.DataFrame.from_dict(data2, orient='index',
                                                      columns=['Pearson', 'Kendall', 'Spearman'])
                     cus_df3 = pd.DataFrame.from_dict(data3, orient='index',
+                                                     columns=['Pearson', 'Kendall', 'Spearman'])
+                    cus_df4 = pd.DataFrame.from_dict(data4, orient='index',
                                                      columns=['Pearson', 'Kendall', 'Spearman'])
 
                     st.markdown(
@@ -208,6 +222,9 @@ def run():
                     st.markdown(
                         "Correlation between Neutral Sentiments and Reproduction Rate")
                     st.table(cus_df3)
+                    st.markdown(
+                        "Correlation between Mixed Sentiments and Reproduction Rate")
+                    st.table(cus_df4)
 
         else:
             st.markdown(
