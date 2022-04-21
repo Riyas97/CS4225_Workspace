@@ -10,7 +10,7 @@ from scipy.stats.stats import kendalltau
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-df = pd.read_csv("processed_metrics.csv")
+df = pd.read_csv("part-00000-59491de8-9173-41d4-b610-f61c71022b94-c000.csv")
 df['date'] = pd.to_datetime(df['date'], format='%d/%m/%Y')
 df['date'] = df['date'].dt.date
 
@@ -26,13 +26,19 @@ def run():
     pages = ["Visualize Single Country", "Visualize Multiple Countries"]
     st.sidebar.subheader("First, choose a visualization type...")
     section = st.sidebar.radio('Visualization selected:', pages)
-    countries = ["Singapore", "United States"]
+    countries = ['Singapore', 'United States', 'Italy', 'Germany', 'Norway', 'United Kingdom', 'Australia', 'Taiwan',
+                 'Hong Kong', 'China', 'Brazil', 'France', 'New Zealand', 'South Korea', 'Japan',
+                 'Vietnam', 'India', 'Canada', 'Saudi Arabia', 'Bahrain',
+                 'South Africa', 'Egypt', 'Argentina']
 
     if section == "Visualize Single Country":
 
         st.sidebar.subheader("Now, select a country to visualize...")
         country_selected = st.sidebar.selectbox(
-            'Country Selected:', ['Singapore', 'United States'])
+            'Country Selected:', ['Singapore', 'United States', 'Italy', 'Germany', 'Norway', 'United Kingdom', 'Australia', 'Taiwan',
+                                  'Hong Kong', 'China', 'Brazil', 'France', 'New Zealand', 'South Korea', 'Japan',
+                                  'Vietnam', 'India', 'Canada', 'Saudi Arabia', 'Bahrain',
+                                  'South Africa', 'Egypt', 'Argentina'])
 
         st.sidebar.subheader("Now, select a time frame...")
         start_date = st.sidebar.date_input(
