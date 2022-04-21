@@ -74,12 +74,10 @@ def run():
             fig1 = make_subplots(rows=1, cols=1)
             fig1.add_scatter(
                 x=df_filtered["date"], y=df_filtered["stringency_index"], mode='lines', name="stringency_index")
-            fig1.add_scatter(x=df_filtered["date"], y=[
-                             val * 100 for val in df_filtered["%_of_positive_sentiments"]], mode='lines', name="%_of_positive_sentiments")
-            fig1.add_scatter(x=df_filtered["date"], y=[
-                             val * 100 for val in df_filtered["%_of_negative_sentiments"]], mode='lines', name="%_of_negative_sentiments")
-            fig1.add_scatter(x=df_filtered["date"], y=[
-                             val * 100 for val in df_filtered["%_of_mixed_sentiments"]], mode='lines', name="%_of_mixed_sentiments")
+            fig1.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_positive_sentiments"], mode='lines', name="%_of_positive_sentiments")
+            fig1.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_negative_sentiments"], mode='lines', name="%_of_negative_sentiments")
+            fig1.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_mixed_sentiments"], mode='lines', name="%_of_mixed_sentiments")
+            fig1.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_neutral_sentiments"], mode='lines', name="%_of_neutral_sentiments")
 
             fig1.update_layout(
                 xaxis_title="Date",
@@ -131,12 +129,18 @@ def run():
             fig2 = make_subplots(rows=1, cols=1)
             fig2.add_scatter(
                 x=df_filtered["date"], y=df_filtered["reproduction_rate"], mode='lines', name="reproduction_rate")
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_positive_sentiments"],
-                             mode='lines', name="proportion_of_positive_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_negative_sentiments"],
-                             mode='lines', name="proportion_of_negative_sentiments")
-            fig2.add_scatter(x=df_filtered["date"], y=df_filtered["%_of_mixed_sentiments"],
-                             mode='lines', name="proportion_of_mixed_sentiments")
+            fig2.add_scatter(x=df_filtered["date"], y=[
+                val / 100 for val in df_filtered["%_of_positive_sentiments"]],
+                mode='lines', name="proportion_of_positive_sentiments")
+            fig2.add_scatter(x=df_filtered["date"], y=[
+                val / 100 for val in df_filtered["%_of_negative_sentiments"]],
+                mode='lines', name="proportion_of_negative_sentiments")
+            fig2.add_scatter(x=df_filtered["date"], y=[
+                val / 100 for val in df_filtered["%_of_mixed_sentiments"]],
+                mode='lines', name="proportion_of_mixed_sentiments")
+            fig2.add_scatter(x=df_filtered["date"], y=[
+                val / 100 for val in df_filtered["%_of_neutral_sentiments"]],
+                mode='lines', name="proportion_of_neutral_sentiments")
 
             fig2.update_layout(
                 title="<b>Chart 2: Reproduction Rate vs Time & Proportions of Sentiments vs Time</b>",
@@ -162,9 +166,9 @@ def run():
 
             correlation_values = st.expander('Correlation values')
             with correlation_values:
-                # st.table(corr_df1)
-                # st.table(corr_df2)
-                # st.table(corr_df3)
+                st.table(corr_df1)
+                st.table(corr_df2)
+                st.table(corr_df3)
                 data1 = {'Correlation values': [
                     corr_df1.iat[1, 3], corr_df2.iat[1, 3], corr_df3.iat[1, 3]]}
                 data2 = {'Correlation values': [
