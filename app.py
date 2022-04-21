@@ -307,9 +307,6 @@ def run():
             st.info(
                 "🛈 Click on the respective variable legend (on the right of the chart) to select or deselect it.")
 
-            st.markdown(
-                "Expand the tab below to better understand what each metrics/variables mean")
-
             metrics_meaning = st.expander('What does the metrics mean?')
             with metrics_meaning:
                 st.markdown("stringency_index: Composite measure based on nine response indicators including school closures, workplace closures, and travel bans, rescaled to a value from 0 to 100 (100 = strictest)")
