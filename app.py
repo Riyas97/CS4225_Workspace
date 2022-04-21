@@ -13,7 +13,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 df = pd.read_csv("part-00000-47944130-32bd-4816-8036-a44d53839f87-c000.csv")
 df['date'] = pd.to_datetime(df['date'], format='%d/%m/%Y')
 df['date'] = df['date'].dt.date
-df.sort_values(by=['location'], ascending=False)
+df = df.sort_values(by=['location'], ascending=False)
 
 st.title("Sentiment Analysis of Tweets about COVID-19")
 st.sidebar.title("Lets' get started!")
