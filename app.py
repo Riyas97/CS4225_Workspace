@@ -192,9 +192,9 @@ def run():
 
                 correlation_values = st.expander('Correlation values')
                 with correlation_values:
-                    st.table(corr_df1)
-                    st.table(corr_df2)
-                    st.table(corr_df3)
+                    #st.table(corr_df1)
+                    #st.table(corr_df2)
+                    #st.table(corr_df3)
                     data1 = {'Correlation values': [
                         corr_df1.iat[1, 8], corr_df2.iat[1, 8], corr_df3.iat[1, 8]]}
                     data2 = {'Correlation values': [
